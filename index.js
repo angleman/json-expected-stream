@@ -17,7 +17,7 @@ function JsonExpectedStream(expected) {
 			var parsed = JSON.parse(json);
 			var expected = {}
 			for (var i in self.expected) {
-				expected = (parsed[i]) ? parsed[i] : self.expected[i];
+				expected[i] = (parsed[i]) ? parsed[i] : self.expected[i];
 			}
 			json = JSON.stringify(expected);
 			data = new Buffer(json, 'utf8');
