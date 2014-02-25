@@ -1,23 +1,25 @@
 var util   = require('util')
 , stream   = require('stream').Transform || require('readable-stream').Transform // stream 2 compatible
-, jsonMask = require('json-mask');
 ; 
 
  
 // json string in and out
-function JsonMaskStream(mask) {
+function JsonExpectedStream(expected) {
 	var self = this;
  
-	self.mask = mask;
+	self.expected = expected;
   
 	stream.call(self, { objectMode: true });
  
 	self._transform = function (data, encoding, callback) {
-		if (data) {
+		if (data && self.expected) {
 			var json   = data.toString('utf8');
 			var parsed = JSON.parse(json);
-			var masked = jsonMask(parsed, self.mask);
-			json = JSON.stringify(masked);
+			var expected = {}
+			for (var i in self.expected) {
+				expected = (parsed[i]) ? parsed[i] : self.expected[i];
+			}
+			json = JSON.stringify(expected);
 			data = new Buffer(json, 'utf8');
 		}
 		self.push(data);
@@ -26,6 +28,6 @@ function JsonMaskStream(mask) {
 }
 
  
-util.inherits(JsonMaskStream, stream);
+util.inherits(JsonExpectedStream, stream);
  
-module.exports = JsonMaskStream;
+module.exports = JsonExpectedStream;
