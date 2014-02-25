@@ -1,4 +1,4 @@
-<img src="https://raw.github.com/angleman/json-expect-stream/master/logo.jpg" align="right" width="354px" />
+<img src="https://raw.github.com/angleman/json-expected-stream/master/logo.jpg" align="right" width="354px" />
 # json-expected-stream 
 
 Filter stream that enforces only selected JSON object strings exist and that they do exist. 
