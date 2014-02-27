@@ -15,11 +15,11 @@ function JsonExpectedStream(expected) {
 		if (data && self.expected) {
 			var json   = data.toString('utf8');
 			var parsed = JSON.parse(json);
-			var expected = {}
+			var row = {}
 			for (var i in self.expected) {
-				expected[i] = (parsed[i]) ? parsed[i] : self.expected[i];
+				row[i] = (typeof parsed[i] !== 'undefined') ? parsed[i] : self.expected[i];
 			}
-			json = JSON.stringify(expected);
+			json = JSON.stringify(row);
 			data = new Buffer(json, 'utf8');
 		}
 		self.push(data);
