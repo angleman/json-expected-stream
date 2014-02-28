@@ -23,7 +23,7 @@ var fs                 = require('fs');
 var logstream          = fs.createReadStream('logfile.json');
 var split              = new require('split')();
 var JsonExpectedStream = require('json-expected-stream');
-var expectedStream     = new JsonExpectedStream({ url: "", city: null, timestamp: null });
+var expectedStream     = new JsonExpectedStream([ "url", "city", "timestamp" ]);
 
 logstream
 .pipe(split)
