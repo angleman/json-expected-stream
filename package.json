@@ -1,6 +1,6 @@
 {
   "name": "json-expected-stream",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Filter stream that enforces only selected JSON object string elements exist and that they exist in order",
   "main": "index.js",
   "scripts": {
