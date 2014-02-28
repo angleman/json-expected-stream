@@ -1,18 +1,20 @@
+// gh:angleman/json-expected-string
+// MIT
 var util   = require('util')
 , stream   = require('stream').Transform || require('readable-stream').Transform // stream 2 compatible
 ; 
 
- 
+
 // json string in and out
 function JsonExpectedStream(expected) {
 	var self = this;
- 
+
 	self.expected = expected;
-  
+
 	stream.call(self, { objectMode: true });
- 
+
 	self._transform = function (data, encoding, callback) {
-		if (data && self.expected) {
+		if (data) {
 			var json   = data.toString('utf8');
 			var parsed = JSON.parse(json);
 			var row = {}
@@ -27,7 +29,6 @@ function JsonExpectedStream(expected) {
 	};
 }
 
- 
+
 util.inherits(JsonExpectedStream, stream);
- 
 module.exports = JsonExpectedStream;
