@@ -1,7 +1,7 @@
 <img src="https://raw.github.com/angleman/json-expected-stream/master/logo.jpg" align="right" width="354px" />
 # json-expected-stream 
 
-Filter stream that enforces only selected JSON object strings exist and that they do exist. 
+Filter stream that enforces only selected JSON object string elements exist and that they exist in order. 
 
 
 ## Install
