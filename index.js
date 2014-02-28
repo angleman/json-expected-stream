@@ -9,8 +9,6 @@ var util   = require('util')
 function JsonExpectedStream(expected) {
 	var self = this;
 
-	self.expected = expected;
-
 	stream.call(self, { objectMode: true });
 
 	self._transform = function (data, encoding, callback) {
@@ -18,11 +16,12 @@ function JsonExpectedStream(expected) {
 			var json   = data.toString('utf8');
 			var parsed = JSON.parse(json);
 			var row = {}
-			for (var i in self.expected) {
-				row[i] = (typeof parsed[i] !== 'undefined') ? parsed[i] : self.expected[i];
+			for (var i=0; i < expected.length; i++) {
+				var nam = expected[i]
+				row[nam] = (typeof parsed[nam] !== 'undefined') ? parsed[nam] : ''
 			}
-			json = JSON.stringify(row);
-			data = new Buffer(json, 'utf8');
+			json = JSON.stringify(row)
+			data = new Buffer(json, 'utf8')
 		}
 		self.push(data);
 		callback();
